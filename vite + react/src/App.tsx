@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { Board } from './components/Board'
+
 export const App: React.FC = () => {
   const [count, setCount] = useState(0)
 
@@ -8,8 +10,7 @@ export const App: React.FC = () => {
   return (
     <div className="wrapper">
       <h1>🐍 React Snake Game</h1>
-      <button onClick={increment}>👍 click</button>
-      <strong>Count: {count}</strong>
+      <Board />
     </div>
   )
 }
