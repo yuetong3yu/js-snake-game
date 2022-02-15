@@ -40,3 +40,6 @@ code {
   flex: 1;
   border: 1px solid #6497b1;
 }
+.apple {
+  background-color: red;
+}

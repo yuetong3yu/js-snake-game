@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { BOARD_SIZE } from './const'
+import { TPosition } from '../../types'
+import { isEqualPosition } from '../../utils'
+import { BOARD_SIZE, initialApplePosition } from './const'
 
-export const Board: React.FC = () => {
+interface IProps {}
+
+export const Board: React.FC<IProps> = (props) => {
+  const [applePosition, setApplePosition] =
+    useState<TPosition>(initialApplePosition)
+
+  console.log('123 apple', applePosition)
+
   return (
     <div
       className="board-wrapper"
@@ -15,7 +24,10 @@ export const Board: React.FC = () => {
         return (
           <div className="row">
             {Array.from(Array(BOARD_SIZE)).map((_, itemIndex) => {
-              return <div className="cell"></div>
+              const poi: TPosition = [rowIndex, itemIndex]
+              const isApple = isEqualPosition(poi, applePosition)
+
+              return <div className={`cell ${isApple ? 'apple' : ''}`}></div>
             })}
           </div>
         )
