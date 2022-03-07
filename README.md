@@ -1,1 +1,1 @@
-Pure HTML / JavaScript Snake Game.
+variant versions of javascript snake games.
