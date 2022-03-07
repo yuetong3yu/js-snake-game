@@ -1,5 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const App: React.FC = () => {
-  return <h1>Hello World</h1>
+  const [count, setCount] = useState(0)
+
+  const increment = () => setCount(count + 1)
+
+  return (
+    <div className="wrapper">
+      <h1>🐍 React Snake Game</h1>
+      <button onClick={increment}>👍 click</button>
+      <strong>Count: {count}</strong>
+    </div>
+  )
 }
