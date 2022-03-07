@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { TPosition } from '../../types'
-import { isEqualPosition } from '../../utils'
+import { isEqualPosition, randomNumber } from '../../utils'
 import { BOARD_SIZE, initialApplePosition } from './const'
 
 interface IProps {}
@@ -9,8 +9,19 @@ interface IProps {}
 export const Board: React.FC<IProps> = (props) => {
   const [applePosition, setApplePosition] =
     useState<TPosition>(initialApplePosition)
+  const [snakePositions, setSnakePositions] = useState<TPosition[]>([[10, 10]])
 
-  console.log('123 apple', applePosition)
+  /**
+   * reset apple position, if apple position is equal to snake position
+   */
+  useEffect(() => {
+    if (snakePositions.some((i) => isEqualPosition(i, applePosition))) {
+      setApplePosition([
+        randomNumber(0, BOARD_SIZE - 1),
+        randomNumber(0, BOARD_SIZE - 1),
+      ])
+    }
+  }, [applePosition, snakePositions])
 
   return (
     <div
@@ -26,8 +37,17 @@ export const Board: React.FC<IProps> = (props) => {
             {Array.from(Array(BOARD_SIZE)).map((_, itemIndex) => {
               const poi: TPosition = [rowIndex, itemIndex]
               const isApple = isEqualPosition(poi, applePosition)
+              const isSnake = snakePositions.some((i) =>
+                isEqualPosition(i, poi)
+              )
 
-              return <div className={`cell ${isApple ? 'apple' : ''}`}></div>
+              return (
+                <div
+                  className={`cell ${isApple ? 'apple' : ''} ${
+                    isSnake ? 'snake' : ''
+                  }`}
+                ></div>
+              )
             })}
           </div>
         )

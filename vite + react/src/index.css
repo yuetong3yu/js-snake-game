@@ -41,5 +41,8 @@ code {
   border: 1px solid #6497b1;
 }
 .apple {
-  background-color: red;
+  background-color: #ee4035;
+}
+.snake {
+  background-color: #7bc043;
 }
