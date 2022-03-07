@@ -1,3 +1,4 @@
+import { BOARD_SIZE } from '../components/Board/const'
 import { TPosition } from '../types'
 
 /**
@@ -5,6 +6,13 @@ import { TPosition } from '../types'
  */
 export function randomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+/**
+ * Generate a random position
+ */
+export function randomPosition(): TPosition {
+  return [randomNumber(0, BOARD_SIZE - 1), randomNumber(0, BOARD_SIZE - 1)]
 }
 
 /**

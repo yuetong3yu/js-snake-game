@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
 import { TPosition } from '../../types'
-import { isEqualPosition, randomNumber } from '../../utils'
-import { BOARD_SIZE, initialApplePosition } from './const'
+import { isEqualPosition, randomNumber, randomPosition } from '../../utils'
+import { BOARD_SIZE } from './const'
 
 interface IProps {}
 
 export const Board: React.FC<IProps> = (props) => {
-  const [applePosition, setApplePosition] =
-    useState<TPosition>(initialApplePosition)
+  const [applePosition, setApplePosition] = useState<TPosition>(
+    randomPosition()
+  )
   const [snakePositions, setSnakePositions] = useState<TPosition[]>([[10, 10]])
 
   /**
@@ -16,10 +17,7 @@ export const Board: React.FC<IProps> = (props) => {
    */
   useEffect(() => {
     if (snakePositions.some((i) => isEqualPosition(i, applePosition))) {
-      setApplePosition([
-        randomNumber(0, BOARD_SIZE - 1),
-        randomNumber(0, BOARD_SIZE - 1),
-      ])
+      setApplePosition(randomPosition())
     }
   }, [applePosition, snakePositions])
 
